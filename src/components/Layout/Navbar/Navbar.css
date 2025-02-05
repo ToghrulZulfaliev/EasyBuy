@@ -1,0 +1,101 @@
+.nav {
+    color: #333;
+    text-decoration: none;
+    font-weight: 500;
+    position: relative;
+    padding: 5px 0;
+    transition: color 0.3s ease;
+    display: inline-block;
+    width: fit-content;
+
+}
+
+.nav::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background-color: #7c8c9e;
+    transition: width 0.3s ease;
+    transform: translateX(-50%);
+}
+
+.nav:hover::after,
+.nav.active::after {
+    width: 100%;
+}
+
+@media (max-width: 991px) {
+    .nav-link {
+        display: flex;
+        justify-content: center;
+    }
+
+    .nav {
+        width: fit-content;
+        margin: 0 auto;
+    }
+}
+
+.navbar-brand {
+    background: linear-gradient(45deg, #333, #666);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+
+}
+
+.navbar-brand:hover {
+    transform: scale(1.05);
+    background: linear-gradient(45deg, #000, #444);
+    background-clip: text;
+    -webkit-background-clip: text;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+.navbar {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .1);
+}
+
+.nav {
+    text-decoration: none;
+    color: #000;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.nav.active {
+    color: #333;
+}
+
+.nav:hover {
+    color: #333;
+}
+
+.user-name {
+    font-weight: 500;
+    color: #333;
+}
+
+.btn-outline-dark {
+    transition: all 0.3s ease;
+}
+
+.btn-outline-dark:hover {
+    background-color: #333;
+    border-color: #333;
+}
+
+.navbar-collapse {
+
+
+    transition: max-height 0.3s ease-in-out;
+}

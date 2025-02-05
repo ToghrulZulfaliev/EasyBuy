@@ -1,0 +1,50 @@
+.form-control:focus {
+    border-color: #80bdff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, .25);
+}
+
+.btn-dark {
+    background-color: #000;
+    border-color: #000;
+    transition: all 0.3s ease;
+}
+
+.btn-dark:hover {
+    background-color: #333;
+    border-color: #333;
+    transform: translateY(-2px);
+}
+
+.btn-dark:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+}
+
+.form-group label {
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.invalid-feedback {
+    font-size: 0.875rem;
+}
+
+.text-info {
+    color: #17a2b8;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.text-info:hover {
+    color: #117a8b;
+}
+
+@media (max-width: 576px) {
+    .container {
+        padding: 0 15px;
+    }
+
+    .btn-dark {
+        width: 100%;
+    }
+}

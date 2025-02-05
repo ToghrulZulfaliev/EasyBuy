@@ -1,0 +1,22 @@
+.product-image {
+    transition: transform 0.3s ease;
+    width: 100%;
+    height: auto;
+}
+
+.product-image:hover {
+    transform: scale(1.05);
+}
+
+.btn {
+    transition: all 0.3s ease;
+}
+
+.btn-dark:hover {
+    opacity: 0.9;
+}
+
+.btn-outline-dark:hover {
+    background-color: #343a40;
+    color: #fff;
+}
