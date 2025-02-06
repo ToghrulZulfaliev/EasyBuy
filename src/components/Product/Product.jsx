@@ -19,7 +19,7 @@ const Product = ({ product }) => {
                 <p className="card-text fw-bold fs-5">${product.price}</p>
                 <div className="mt-auto d-flex gap-2">
                     <Link
-                        to="/card"
+                        to="/cart"
                         className="btn btn-dark flex-grow-1"
                     >
                         Add to Cart

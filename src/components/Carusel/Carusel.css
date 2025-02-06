@@ -46,6 +46,8 @@
 
     .swiper-slide img {
         max-height: 400px;
+        background-size: contain;
+        background-position: center;
     }
 
     .slide-content h2 {
