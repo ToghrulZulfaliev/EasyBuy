@@ -13,25 +13,7 @@ const Navbar = () => {
 
 
 
-    useEffect(() => {
-        const checkAuth = () => {
-            // const userData = JSON.parse(localStorage.getItem('user'));
-            // if (userData && userData.isLoggedIn) {
-            //     setUser(userData);
-            // } else {
-            //     setUser(null);
-            // }
-        };
 
-        checkAuth();
-        window.addEventListener('storage', checkAuth);
-        window.addEventListener('userLogin', checkAuth);
-
-        return () => {
-            window.removeEventListener('storage', checkAuth);
-            window.removeEventListener('userLogin', checkAuth);
-        };
-    }, []);
 
     const handleLogout = () => {
         navigate('/login');
@@ -50,10 +32,14 @@ const Navbar = () => {
             <nav className="navbar navbar-expand-lg navbar-light bg-light py-3 sticky-top">
                 <div className="container">
                     <Link
+
                         className="navbar-brand fw-bold fs-4 px-2"
                         to="/"
                         onClick={() => setActiveLink('/')}
+
                     >
+
+
                         EasyBuy
                     </Link>
                     <button
