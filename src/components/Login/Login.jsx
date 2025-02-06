@@ -3,10 +3,15 @@ import * as Yup from 'yup';
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import './Login.css';
+import { useDispatch } from 'react-redux';
+import { setAll } from '../../redux/features/authSlice';
+
 
 const Login = () => {
     const navigate = useNavigate();
     const [message, setMessage] = useState({ type: '', text: '' });
+    const dispatch = useDispatch();
+
 
     const formik = useFormik({
         initialValues: {
@@ -24,7 +29,7 @@ const Login = () => {
                 .required('Password is required')
         }),
 
-        onSubmit: async (values, { setSubmitting }) => {
+        onSubmit: async (values, { setSubmitting, resetForm }) => {
             try {
                 const response = await fetch("https://ecommerce.ramil.dev/api/v2/auth/login", {
                     method: "POST",
@@ -34,7 +39,6 @@ const Login = () => {
                     },
                     body: JSON.stringify({
                         ...values,
-
                         login_by: "email"
 
                     })
@@ -45,23 +49,17 @@ const Login = () => {
                 const data = await response.json();
 
 
+
                 if (data.result) {
+                    resetForm();
+                    dispatch(setAll({ access_token: data.access_token, user: data.user }));
 
-
-
-
-                    localStorage.setItem('user', JSON.stringify({
-
-                        email: values.email_or_phone,
-                        isLoggedIn: true
-
-                    }));
-                    console.log(data)
 
                     setMessage({
                         type: 'success',
                         text: 'Login successful! Redirecting...'
                     });
+
 
                     setTimeout(() => {
                         navigate('/');
@@ -83,6 +81,10 @@ const Login = () => {
         }
     });
 
+
+    console.log(formik.values);
+
+
     return (
         <div className="container my-3 py-3">
             <h1 className="text-center">Login</h1>
@@ -98,6 +100,7 @@ const Login = () => {
                         <div className="form-group my-3">
                             <label htmlFor="email_or_phone">Email</label>
                             <input
+                                autoComplete='off'
                                 type="email"
                                 className={`form-control ${formik.errors.email_or_phone && formik.touched.email_or_phone ? 'is-invalid' : ''}`}
                                 id="email_or_phone"
@@ -119,6 +122,7 @@ const Login = () => {
                                 type="password"
                                 className={`form-control ${formik.errors.password && formik.touched.password ? 'is-invalid' : ''}`}
                                 id="password"
+                                autoComplete='off'
                                 name="password"
                                 value={formik.values.password}
                                 onChange={formik.handleChange}

@@ -4,11 +4,10 @@ import ProductsButtons from '../components/Products/ProductsButtons'
 
 const HomePages = () => {
     return (
-        <div>
+        <>
             <Carusel />
             <ProductsButtons />
-
-        </div>
+        </>
     )
 }
 

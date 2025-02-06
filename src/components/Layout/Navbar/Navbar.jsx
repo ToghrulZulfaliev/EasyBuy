@@ -1,21 +1,26 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import './Navbar.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { clearAll } from '../../../redux/features/authSlice';
 
 const Navbar = () => {
     const navigate = useNavigate();
     const [isOpen, setIsOpen] = useState(false);
     const [activeLink, setActiveLink] = useState('/');
-    const [user, setUser] = useState(null);
+    const { user } = useSelector(state => state.auth);
+    const dispatch = useDispatch();
+
+
 
     useEffect(() => {
         const checkAuth = () => {
-            const userData = JSON.parse(localStorage.getItem('user'));
-            if (userData && userData.isLoggedIn) {
-                setUser(userData);
-            } else {
-                setUser(null);
-            }
+            // const userData = JSON.parse(localStorage.getItem('user'));
+            // if (userData && userData.isLoggedIn) {
+            //     setUser(userData);
+            // } else {
+            //     setUser(null);
+            // }
         };
 
         checkAuth();
@@ -29,14 +34,16 @@ const Navbar = () => {
     }, []);
 
     const handleLogout = () => {
-        localStorage.removeItem('user');
-        setUser(null);
         navigate('/login');
+        dispatch(clearAll());
     };
 
     const toggle = () => {
         setIsOpen(!isOpen);
     };
+
+    console.log(user);
+
 
     return (
         <div>

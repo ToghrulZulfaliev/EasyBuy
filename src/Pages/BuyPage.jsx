@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import BuyNow from '../components/Buynow/BuyNow';
 
 const BuyPage = () => {
-    const { id } = useParams(); // 🔹 `id`-ni düzgün götür
+    const { id } = useParams();
     const [product, setProduct] = useState(null);
     const [loading, setLoading] = useState(true);
 

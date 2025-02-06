@@ -3,12 +3,7 @@ import ProductsButtons from '../components/Products/ProductsButtons'
 
 const ProductsPage = () => {
     return (
-        <div>
-
-            <ProductsButtons />
-
-
-        </div>
+        <ProductsButtons />
     )
 }
 

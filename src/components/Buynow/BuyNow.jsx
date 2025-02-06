@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './BuyNow.css';
-import { useParams } from 'react-router-dom';
+;
 
 
 const BuyNow = ({ product }) => {
-    const { id } = useParams();
-    const [products, setProducts] = useState([]);
+
     const handleBuyNow = () => {
         console.log(`Purchase confirmed for ${product.title}`);
     };
