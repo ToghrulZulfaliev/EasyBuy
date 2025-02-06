@@ -17,13 +17,13 @@ const App = () => {
       <Route path="/" element={<Layout />}>
         <Route index element={<HomePage />} />
         <Route path="products" element={<ProductsPage />} />
-
+        <Route path="product/:id" element={<BuyPage />} />
         <Route path="about" element={<AboutPage />} />
         <Route path="contact" element={<ContactPage />} />
         <Route path="login" element={<LoginPage />} />
         <Route path="register" element={<RegisterPage />} />
         <Route path="cart" element={<CardPage />} />
-        <Route path="buyNow" element={<BuyPage />} />
+
         <Route path="*" element={
           <div className="container text-center py-5">
             <h1>404 - Page Not Found</h1>

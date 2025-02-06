@@ -1,24 +1,34 @@
-import React from 'react'
-import BuyNow from '../components/Buynow/BuyNow'
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import BuyNow from '../components/Buynow/BuyNow';
+
 const BuyPage = () => {
-    const [products, setProducts] = useState([]);
+    const { id } = useParams(); // 🔹 `id`-ni düzgün götür
+    const [product, setProduct] = useState(null);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        fetch("https://fakestoreapi.com/products")
+        setLoading(true);
+        fetch(`https://fakestoreapi.com/products/${id}`)
             .then((res) => res.json())
-            .then((data) => setProducts(data))
-            .catch((err) => console.error("Error fetching products:", err));
-    }, []);
+            .then((data) => {
+                setProduct(data);
+                setLoading(false);
+            })
+            .catch((err) => {
+                console.error("Error fetching product:", err);
+                setLoading(false);
+            });
+    }, [id]);
+
+    if (loading) return <h2>Loading...</h2>;
+    if (!product) return <h2>Product not found</h2>;
 
     return (
         <div className="container">
-            {products.map((product) => (
-                <BuyNow key={product.id} product={product} />
-            ))}
+            <BuyNow product={product} />
         </div>
     );
+};
 
-}
-
-export default BuyPage
+export default BuyPage;

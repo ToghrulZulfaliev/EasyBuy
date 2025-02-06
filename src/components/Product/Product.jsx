@@ -25,7 +25,7 @@ const Product = ({ product }) => {
                         Add to Cart
                     </Link>
                     <Link
-                        to="/buynow"
+                        to={`/product/${product.id}`}
                         className="btn btn-secondary flex-grow-1"
                     >
                         Buy Now
