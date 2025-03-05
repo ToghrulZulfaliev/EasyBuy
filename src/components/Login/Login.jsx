@@ -54,7 +54,7 @@ const Login = () => {
                     resetForm();
                     dispatch(setAll({ access_token: data.access_token, user: data.user }));
 
-
+                    
                     setMessage({
                         type: 'success',
                         text: 'Login successful! Redirecting...'

@@ -11,18 +11,32 @@ import AboutPage from '../pages/AboutPage';
 import ContactPage from '../pages/ContactPage';
 import LoginPage from '../pages/LoginPage';
 import RegisterPage from '../pages/RegisterPage';
-import CardPage from '../pages/CardPage';
+import CartPage from '../pages/CartPage';
 import BuyPage from '../pages/BuyPage';
 import { useEffect } from 'react';
 import { GetFromLocalStorage } from '../utils/storages/LocalStorage';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setUser } from '../redux/features/authSlice';
+import { addToCart, getGuestItems, getLocalStorageItems, getUserItems, setToCard } from '../redux/features/CartSlice';
 
 
 const AppNavigator = () => {
-
     const dispatch = useDispatch();
+    const { user } = useSelector(state => state.auth);
 
+    useEffect(() => {
+        if (!user) {
+            const items = getGuestItems();
+            console.log({ items, user });
+            dispatch(setToCard(items));
+        } else {
+            const items = getUserItems(user.email);
+            console.log({ items, user });
+            console.log({ items });
+
+            dispatch(setToCard(items));
+        }
+    }, [user]);
 
     useEffect(() => {
 
@@ -61,7 +75,7 @@ const AppNavigator = () => {
             <Route path="contact" element={<ContactPage />} />
             <Route path="login" element={<LoginPage />} />
             <Route path="register" element={<RegisterPage />} />
-            <Route path="cart" element={<CardPage />} />
+            <Route path="cart" element={<CartPage />} />
 
             <Route path="*" element={
                 <div className="container text-center py-5">

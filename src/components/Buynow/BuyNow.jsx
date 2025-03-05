@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../../redux/features/CartSlice';
 import './BuyNow.css';
-;
-
 
 const BuyNow = ({ product }) => {
+    const dispatch = useDispatch();
 
-    const handleBuyNow = () => {
-        console.log(`Purchase confirmed for ${product.title}`);
+    const handleAddToCart = () => {
+        dispatch(addToCart(product));
     };
 
     return (
@@ -29,16 +30,15 @@ const BuyNow = ({ product }) => {
                         <i className="fa fa-star text-warning"></i>
                         <span className="text-muted ms-2">({product.rating.count} reviews)</span>
                     </div>
-                    <h2 className="h1 mb-4">${product.price}</h2>
-                    <p className="lead mb-4">{product.description.substring(0, 100)}...</p>
+                    <h2 className="h1 mb-4">${product.price.toFixed(2)}</h2>
+                    <p className="lead mb-4">{product.description}</p>
                     <div className="d-flex gap-3">
-                        <Link
-                            to="/cart"
-                            onClick={handleBuyNow}
+                        <button
+                            onClick={handleAddToCart}
                             className="btn btn-dark px-4 py-2"
                         >
                             Add to Cart
-                        </Link>
+                        </button>
                         <Link
                             to="/products"
                             className="btn btn-outline-dark px-4 py-2"
@@ -51,6 +51,5 @@ const BuyNow = ({ product }) => {
         </div>
     );
 };
-
 
 export default BuyNow;

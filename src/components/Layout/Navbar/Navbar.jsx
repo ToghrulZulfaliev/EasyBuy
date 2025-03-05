@@ -1,5 +1,5 @@
 import { Link, useNavigate } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import './Navbar.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearAll } from '../../../redux/features/authSlice';
@@ -9,11 +9,8 @@ const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [activeLink, setActiveLink] = useState('/');
     const { user } = useSelector(state => state.auth);
+    const { totalQuantity } = useSelector(state => state.cart);
     const dispatch = useDispatch();
-
-
-
-
 
     const handleLogout = () => {
         navigate('/login');
@@ -24,22 +21,15 @@ const Navbar = () => {
         setIsOpen(!isOpen);
     };
 
-
-
-
     return (
-        <div>
-            <nav className="navbar navbar-expand-lg navbar-light bg-light py-3 sticky-top">
+        <div className='position-fixed w-100 top-0' style={{ zIndex: 10 }}>
+            <nav className="navbar navbar-expand-lg navbar-light bg-light py-3">
                 <div className="container">
                     <Link
-
                         className="navbar-brand fw-bold fs-4 px-2"
                         to="/"
                         onClick={() => setActiveLink('/')}
-
                     >
-
-
                         EasyBuy
                     </Link>
                     <button
@@ -96,7 +86,6 @@ const Navbar = () => {
                         </ul>
                         <div className="buttons text-center">
                             {user ? (
-                                console.log(user),
                                 <>
                                     <span className="me-3 user-name">Welcome, {user.name || user.email}</span>
                                     <button
@@ -106,7 +95,7 @@ const Navbar = () => {
                                         <i className="fa fa-sign-out-alt mr-1"></i> Logout
                                     </button>
                                     <Link to="/cart" className="btn btn-outline-dark m-2">
-                                        <i className="fa fa-shopping-cart"></i> Cart (0)
+                                        <i className="fa fa-shopping-cart"></i> Cart ({totalQuantity})
                                     </Link>
                                 </>
                             ) : (
@@ -118,7 +107,7 @@ const Navbar = () => {
                                         <i className="fa fa-user-plus mr-1"></i> Register
                                     </Link>
                                     <Link to="/cart" className="btn btn-outline-dark m-2">
-                                        <i className="fa fa-shopping-cart"></i> Cart (0)
+                                        <i className="fa fa-shopping-cart"></i> Cart ({totalQuantity})
                                     </Link>
                                 </>
                             )}

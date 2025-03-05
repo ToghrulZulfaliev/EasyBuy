@@ -15,6 +15,7 @@ const authSlice = createSlice({
             state.access_token = action.payload.access_token;
             state.user = action.payload.user;
             SaveToLocalStorage('access_token', action.payload.access_token);
+            SaveToLocalStorage('user', action.payload.user);
         },
         setAccessToken: (state, action) => {
             state.access_token = action.payload;
@@ -26,6 +27,7 @@ const authSlice = createSlice({
             state.access_token = null;
             state.user = null;
             RemoveFromLocalStorage('access_token');
+            RemoveFromLocalStorage('user');
         }
     }
 });

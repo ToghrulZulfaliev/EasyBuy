@@ -1,11 +1,17 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import "./Product.css"
-
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../../redux/features/CartSlice';
 
 const Product = ({ product }) => {
+    const dispatch = useDispatch();
+
+    const handleAddToCart = () => {
+        dispatch(addToCart(product));
+    };
+
     return (
-        <div className="card h-100" style={{ width: "18rem" }}>
+        <div className="card h-100 product-card" style={{ width: "18rem" }}>
             <img
                 src={product.image}
                 className="card-img-top p-3"
@@ -16,24 +22,25 @@ const Product = ({ product }) => {
                 <h5 className="card-title">{product.title.substring(0, 25)}...</h5>
                 <p className="card-text text-muted small mb-0">{product.category}</p>
                 <p className="card-text">{product.description.substring(0, 50)}...</p>
-                <p className="card-text fw-bold fs-5">${product.price}</p>
+                <p className="card-text fw-bold fs-5">${product.price.toFixed(2)}</p>
                 <div className="mt-auto d-flex gap-2">
-                    <Link
-                        to="/cart"
+                    <button
+                        onClick={handleAddToCart}
                         className="btn btn-dark flex-grow-1"
                     >
+                        <i className="fa fa-shopping-cart me-2"></i>
                         Add to Cart
-                    </Link>
+                    </button>
                     <Link
                         to={`/product/${product.id}`}
-                        className="btn btn-secondary flex-grow-1"
+                        className="btn btn-outline-dark flex-grow-1"
                     >
                         Buy Now
                     </Link>
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default Product
+export default Product;
